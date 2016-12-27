@@ -2,6 +2,7 @@ package com.dreamer.invite.handler;
 
 import com.dreamer.invite.builder.TextBuilder;
 import com.dreamer.invite.service.WeixinService;
+import com.dreamer.invite.utils.StringConstants;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -19,9 +20,7 @@ import java.util.Map;
 public class MsgHandler extends AbstractHandler {
 
     @Override
-    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
-                                    Map<String, Object> context, WxMpService wxMpService,
-                                    WxSessionManager sessionManager) {
+    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) {
 
         WeixinService weixinService = (WeixinService) wxMpService;
 
@@ -30,17 +29,14 @@ public class MsgHandler extends AbstractHandler {
         }
 
         //当用户输入关键词如“你好”，“客服”等，并且有客服在线时，把消息转发给在线客服
-        if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服")
-                && weixinService.hasKefuOnline()) {
+        if (StringUtils.startsWithAny(wxMessage.getContent(), "你好", "客服") && weixinService.hasKefuOnline()) {
             return WxMpXmlOutMessage
                     .TRANSFER_CUSTOMER_SERVICE().fromUser(wxMessage.getToUser())
                     .toUser(wxMessage.getFromUser()).build();
         }
 
         //TODO 组装回复消息
-        String content = "回复信息内容";
+        String content = StringConstants.默认回复消息;
         return new TextBuilder().build(content, wxMessage, weixinService);
-
     }
-
 }
