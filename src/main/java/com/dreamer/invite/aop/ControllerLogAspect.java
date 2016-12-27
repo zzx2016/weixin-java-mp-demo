@@ -31,11 +31,11 @@ public class ControllerLogAspect {
         return "Anonymous";
     }
 
-    @Pointcut("within(com.github.binarywang.demo.spring..*.controller..*)")
+    @Pointcut("within(com.dreamer.invite..*.controller..*)")
     public void inController() {
     }
 
-    @Pointcut("execution(public * com.github.binarywang.demo.spring..*.controller..*.*(..))")
+    @Pointcut("execution(public * com.dreamer.invite..*.controller..*.*(..))")
     public void controller() {
     }
 
