@@ -1,4 +1,4 @@
-package com.github.binarywang.demo.spring.aop;
+package com.dreamer.invite.aop;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.JoinPoint;
@@ -14,14 +14,22 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
- * 
  * @author Binary Wang
- *
  */
 @Aspect
 @Component
 public class ControllerLogAspect {
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+    private static String getLoginUserName() {
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        if (authentication != null) {
+            return authentication.getName();
+        }
+
+        return "Anonymous";
+    }
 
     @Pointcut("within(com.github.binarywang.demo.spring..*.controller..*)")
     public void inController() {
@@ -45,24 +53,14 @@ public class ControllerLogAspect {
         String userName = getLoginUserName();
 
         this.logger.debug("\n【{}】{}.{}() {} ", userName,
-            jp.getTarget()
-            .getClass().getSimpleName(), jp.getSignature().getName(), msg);
-    }
-
-    private static String getLoginUserName() {
-        Authentication authentication = SecurityContextHolder.getContext()
-            .getAuthentication();
-        if (authentication != null) {
-            return authentication.getName();
-        }
-
-        return "Anonymous";
+                jp.getTarget()
+                        .getClass().getSimpleName(), jp.getSignature().getName(), msg);
     }
 
     @Before("controller()")
     public void writeParams(JoinPoint jp) {
         String[] names = ((CodeSignature) jp.getSignature())
-            .getParameterNames();
+                .getParameterNames();
         Object[] args = jp.getArgs();
 
         if (ArrayUtils.isEmpty(names)) {
