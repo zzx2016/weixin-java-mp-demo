@@ -48,7 +48,7 @@ public class WeixinService extends WxMpServiceImpl {
     private MsgHandler msgHandler;
 
     @Autowired
-    private UnsubscribeHandler unsubscribeHandler;
+    private UnSubscribeHandler unSubscribeHandler;
 
     @Autowired
     private SubscribeHandler subscribeHandler;
@@ -74,51 +74,105 @@ public class WeixinService extends WxMpServiceImpl {
         newRouter.rule().handler(this.logHandler).next();
 
         // 接收客服会话管理事件
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.EVT_KF_CREATE_SESSION)
-                .handler(this.kfSessionHandler).end();
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.EVT_KF_CLOSE_SESSION)
-                .handler(this.kfSessionHandler).end();
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT).event(WxConsts.EVT_KF_SWITCH_SESSION)
-                .handler(this.kfSessionHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_EVENT)
+                .event(WxConsts.EVT_KF_CREATE_SESSION)
+                .handler(this.kfSessionHandler)
+                .end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_EVENT)
+                .event(WxConsts.EVT_KF_CLOSE_SESSION)
+                .handler(this.kfSessionHandler)
+                .end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_EVENT)
+                .event(WxConsts.EVT_KF_SWITCH_SESSION)
+                .handler(this.kfSessionHandler)
+                .end();
 
         // 门店审核事件
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT)
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_EVENT)
                 .event(WxConsts.EVT_POI_CHECK_NOTIFY)
                 .handler(this.storeCheckNotifyHandler)
                 .end();
 
         // 自定义菜单事件
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT)
-                .event(WxConsts.BUTTON_CLICK).handler(this.getMenuHandler()).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_EVENT)
+                .event(WxConsts.BUTTON_CLICK)
+                .handler(this.getMenuHandler())
+                .end();
 
         // 点击菜单连接事件
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT)
-                .event(WxConsts.BUTTON_VIEW).handler(this.nullHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_EVENT)
+                .event(WxConsts.BUTTON_VIEW)
+                .handler(this.nullHandler)
+                .end();
 
         // 关注事件
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT)
-                .event(WxConsts.EVT_SUBSCRIBE).handler(this.getSubscribeHandler())
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_EVENT)
+                .event(WxConsts.EVT_SUBSCRIBE)
+                .handler(this.getSubscribeHandler())
                 .end();
 
         // 取消关注事件
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT)
-                .event(WxConsts.EVT_UNSUBSCRIBE).handler(this.getUnsubscribeHandler())
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_EVENT)
+                .event(WxConsts.EVT_UNSUBSCRIBE)
+                .handler(this.getUnSubscribeHandler())
                 .end();
 
         // 上报地理位置事件
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT)
-                .event(WxConsts.EVT_LOCATION).handler(this.getLocationHandler()).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_EVENT)
+                .event(WxConsts.EVT_LOCATION)
+                .handler(this.getLocationHandler())
+                .end();
 
         // 接收地理位置消息
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_LOCATION)
-                .handler(this.getLocationHandler()).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_LOCATION)
+                .handler(this.getLocationHandler())
+                .end();
 
         // 扫码事件
-        newRouter.rule().async(false).msgType(WxConsts.XML_MSG_EVENT)
-                .event(WxConsts.EVT_SCAN).handler(this.getScanHandler()).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(WxConsts.XML_MSG_EVENT)
+                .event(WxConsts.EVT_SCAN)
+                .handler(this.getScanHandler())
+                .end();
 
         // 默认
-        newRouter.rule().async(false).handler(this.getMsgHandler()).end();
+        newRouter
+                .rule()
+                .async(false)
+                .handler(this.getMsgHandler())
+                .end();
 
         this.router = newRouter;
     }
@@ -153,8 +207,8 @@ public class WeixinService extends WxMpServiceImpl {
         return this.subscribeHandler;
     }
 
-    protected UnsubscribeHandler getUnsubscribeHandler() {
-        return this.unsubscribeHandler;
+    protected UnSubscribeHandler getUnSubscribeHandler() {
+        return this.unSubscribeHandler;
     }
 
     protected AbstractHandler getLocationHandler() {

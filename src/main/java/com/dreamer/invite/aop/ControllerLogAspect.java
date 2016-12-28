@@ -19,11 +19,10 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class ControllerLogAspect {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger mLogger = LoggerFactory.getLogger(getClass());
 
     private static String getLoginUserName() {
-        Authentication authentication = SecurityContextHolder.getContext()
-                .getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             return authentication.getName();
         }
@@ -41,26 +40,22 @@ public class ControllerLogAspect {
 
     @Before("inController()")
     public void writeBeforeLog(JoinPoint jp) {
-        this.debugInController(jp, "Start");
+        debugInController(jp, "Start");
     }
 
     @After("inController()")
     public void writeAfterLog(JoinPoint jp) {
-        this.debugInController(jp, "End");
+        debugInController(jp, "End");
     }
 
     private void debugInController(JoinPoint jp, String msg) {
         String userName = getLoginUserName();
-
-        this.logger.debug("\n【{}】{}.{}() {} ", userName,
-                jp.getTarget()
-                        .getClass().getSimpleName(), jp.getSignature().getName(), msg);
+        mLogger.debug("\n【{}】{}.{}() {} ", userName, jp.getTarget().getClass().getSimpleName(), jp.getSignature().getName(), msg);
     }
 
     @Before("controller()")
     public void writeParams(JoinPoint jp) {
-        String[] names = ((CodeSignature) jp.getSignature())
-                .getParameterNames();
+        String[] names = ((CodeSignature) jp.getSignature()).getParameterNames();
         Object[] args = jp.getArgs();
 
         if (ArrayUtils.isEmpty(names)) {

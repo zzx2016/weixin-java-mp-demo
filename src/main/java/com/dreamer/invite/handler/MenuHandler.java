@@ -22,13 +22,11 @@ import java.util.Map;
 public class MenuHandler extends AbstractHandler {
 
     @Override
-    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
-                                    Map<String, Object> context, WxMpService wxMpService,
-                                    WxSessionManager sessionManager) {
+    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService wxMpService, WxSessionManager sessionManager) {
         WeixinService weixinService = (WeixinService) wxMpService;
 
         String key = wxMessage.getEventKey();
-        WxMenuKey menuKey = null;
+        WxMenuKey menuKey;
         try {
             menuKey = JSON.parseObject(key, WxMenuKey.class);
         } catch (Exception e) {
@@ -64,7 +62,5 @@ public class MenuHandler extends AbstractHandler {
         }
 
         return null;
-
     }
-
 }

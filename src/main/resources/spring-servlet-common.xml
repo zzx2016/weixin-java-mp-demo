@@ -29,11 +29,9 @@
         </property>
     </bean>
 
-    <bean id="jsonConverter"
-          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes" value="application/json"/>
     </bean>
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-
 </beans>

@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Binary Wang
  */
 @Component
-public class UnsubscribeHandler extends AbstractHandler {
+public class UnSubscribeHandler extends AbstractHandler {
 
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
