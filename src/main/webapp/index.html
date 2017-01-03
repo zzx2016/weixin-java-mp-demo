@@ -4,13 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.0/weui.min.css"/>
+    <link rel="stylesheet" href="css/style.css">
     <title>精品电子请帖</title>
 </head>
 <body>
+
+<div class="lbox_close wxapi_form">
+    <h3 id="menu-basic">基础接口</h3>
+    <span class="desc">判断当前客户端是否支持指定JS接口</span>
+    <button class="btn btn_primary" id="checkJsApi">checkJsApi</button>
+
+    <h3 id="menu-image">图像接口</h3>
+    <span class="desc">拍照或从手机相册中选图接口</span>
+    <button class="btn btn_primary" id="chooseImage">chooseImage</button>
+    <span class="desc">预览图片接口</span>
+    <button class="btn btn_primary" id="previewImage">previewImage</button>
+    <span class="desc">上传图片接口</span>
+    <button class="btn btn_primary" id="uploadImage">uploadImage</button>
+    <span class="desc">下载图片接口</span>
+    <button class="btn btn_primary" id="downloadImage">downloadImage</button>
+
+    <h3 id="menu-device">设备信息接口</h3>
+    <span class="desc">获取网络状态接口</span>
+    <button class="btn btn_primary" id="getNetworkType">getNetworkType</button>
+
+    <h3 id="menu-location">地理位置接口</h3>
+    <span class="desc">使用微信内置地图查看位置接口</span>
+    <button class="btn btn_primary" id="openLocation">openLocation</button>
+    <span class="desc">获取地理位置接口</span>
+    <button class="btn btn_primary" id="getLocation">getLocation</button>
+
+
+</div>
+
 <div class="weui-footer">
     <p class="weui-footer__text">Copyright &copy; www.e-invite.cn</p>
 </div>
 
+<script src="js/zepto.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/index.js"></script>
+<script src="js/jssdk-config.js"></script>
 </body>
 </html>
