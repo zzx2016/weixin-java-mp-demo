@@ -10,46 +10,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.0/weui.min.css"/>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css"/>
     <title>精品电子请帖</title>
 </head>
 <body>
 
-<div class="lbox_close wxapi_form">
-    <h3 id="menu-basic">基础接口</h3>
-    <span class="desc">判断当前客户端是否支持指定JS接口</span>
-    <button class="btn btn_primary" id="checkJsApi">checkJsApi</button>
+<div class="desc">
+    <h1 class="desc__title">
+        <img src="./images/logo.png" alt="精品电子请帖" height="21px"/>
+    </h1>
+    <p class="desc__content">本公众号提供永久免费的电子请帖功能</p>
+</div>
 
-    <h3 id="menu-image">图像接口</h3>
-    <span class="desc">拍照或从手机相册中选图接口</span>
-    <button class="btn btn_primary" id="chooseImage">chooseImage</button>
-    <span class="desc">预览图片接口</span>
-    <button class="btn btn_primary" id="previewImage">previewImage</button>
-    <span class="desc">上传图片接口</span>
-    <button class="btn btn_primary" id="uploadImage">uploadImage</button>
-    <span class="desc">下载图片接口</span>
-    <button class="btn btn_primary" id="downloadImage">downloadImage</button>
+<div id="form">
+    <div class="weui-cells">
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd"><label class="weui-label">请帖类型</label></div>
+            <div class="weui-cell__bd">
+                <select class="weui-select" name="inviteType">
+                    <option value="1">婚礼</option>
+                    <!--<option value="2">会议</option>
+                    <option value="3">活动</option>-->
+                </select>
+            </div>
+        </div>
+    </div>
 
-    <h3 id="menu-device">设备信息接口</h3>
-    <span class="desc">获取网络状态接口</span>
-    <button class="btn btn_primary" id="getNetworkType">getNetworkType</button>
+    <div id="wedding_form" class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">男方姓名</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" placeholder="输入男方姓名" emptyTips="请输入男方姓名"/>
+            </div>
+            <div class="weui-cell__ft">
+                <i class="weui-icon-warn"></i>
+            </div>
+        </div>
 
-    <h3 id="menu-location">地理位置接口</h3>
-    <span class="desc">使用微信内置地图查看位置接口</span>
-    <button class="btn btn_primary" id="openLocation">openLocation</button>
-    <span class="desc">获取地理位置接口</span>
-    <button class="btn btn_primary" id="getLocation">getLocation</button>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">女方姓名</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" placeholder="输入女方姓名" emptyTips="请输入女方姓名"/>
+            </div>
+            <div class="weui-cell__ft">
+                <i class="weui-icon-warn"></i>
+            </div>
+        </div>
 
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">典礼地址</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" placeholder="输入典礼的地址" emptyTips="请输入典礼的地址"/>
+            </div>
+            <div class="weui-cell__ft">
+                <i class="weui-icon-warn"></i>
+            </div>
+        </div>
 
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="tel" required pattern="^\d{11}$" maxlength="11"
+                       placeholder="输入你的手机号"
+                       emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
+            </div>
+            <div class="weui-cell__ft">
+                <i class="weui-icon-warn"></i>
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">典礼时间</label></div>
+            <div class="weui-cell__bd">
+                <input id="date" class="weui-input" type="datetime-local" value="xxxx" placeholder="xxx"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-cells" id="uploader">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <div class="weui-uploader">
+                    <div class="weui-uploader__hd">
+                        <p class="weui-uploader__title">图片上传</p>
+                        <div class="weui-uploader__info"><span id="uploadCount">0</span>/9</div>
+                    </div>
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="uploaderFiles"></ul>
+                        <div class="weui-uploader__input-box">
+                            <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*"
+                                   multiple="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="weui-btn-area">
+        <a id="uploaderCustomBtn" href="javascript:" class="weui-btn weui-btn_primary">上传</a>
+    </div>-->
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell weui-cell weui-cell_vcode">
+            <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" maxlength="4" type="text" required pattern="REG_VCODE"
+                       placeholder="点击验证码更换"
+                       tips="请输入验证码">
+            </div>
+            <div class="weui-cell__ft">
+                <i class="weui-icon-warn"></i>
+                <img class="weui-vcode-img" src="http://weui.github.io/weui/images/vcode.jpg">
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-btn-area">
+        <a id="formSubmitBtn" href="javascript:" class="weui-btn weui-btn_primary">提交</a>
+    </div>
 </div>
 
 <div class="weui-footer">
     <p class="weui-footer__text">Copyright &copy; www.e-invite.cn</p>
 </div>
 
-<script src="js/zepto.js"></script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script src="js/index.js"></script>
-<script src="js/jssdk-config.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="./js/zepto.js"></script>
+<script type="text/javascript" src="./js/weui.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+<script type="text/javascript" src="./js/jssdk-config.js"></script>
 </body>
 </html>

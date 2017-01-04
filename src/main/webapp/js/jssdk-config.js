@@ -15,7 +15,7 @@ $.ajax({
     success: function (data) {
         //console.log("data.appid:" + data.appid + "    data.timestamp：" + data.timestamp + "    data.noncestr：" + data.noncestr + "    data.signature：" + data.signature);
         wx.config({
-            debug: true,
+            debug: false,
             appId: data.appid,
             timestamp: data.timestamp,
             nonceStr: data.noncestr,
