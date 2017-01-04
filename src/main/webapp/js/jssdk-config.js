@@ -6,8 +6,6 @@
  * H5新特性，所以使用pushState来实现web app的页面会导致签名
  * 失败，此问题会在Android6.2中修复）。
  */
-
-console.log(encodeURIComponent(location.href.split('#')[0]));
 $.ajax({
     type: 'GET',
     url: '/wechat/jssdk',
@@ -15,7 +13,7 @@ $.ajax({
     dataType: 'json',
     timeout: 3000,
     success: function (data) {
-        console.log("data.appid:" + data.appid + "    data.timestamp：" + data.timestamp + "    data.noncestr：" + data.noncestr + "    data.signature：" + data.signature);
+        //console.log("data.appid:" + data.appid + "    data.timestamp：" + data.timestamp + "    data.noncestr：" + data.noncestr + "    data.signature：" + data.signature);
         wx.config({
             debug: true,
             appId: data.appid,

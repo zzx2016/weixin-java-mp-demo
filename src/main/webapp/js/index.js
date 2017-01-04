@@ -3,7 +3,7 @@
  * jssdk提供的原生功能，用于index.html页面
  */
 wx.ready(function () {
-    console.log("wx.ready");
+    //console.log("wx.ready");
     // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
     document.querySelector('#checkJsApi').onclick = function () {
         wx.checkJsApi({
@@ -34,8 +34,9 @@ wx.ready(function () {
 
     // 5.2 图片预览
     document.querySelector('#previewImage').onclick = function () {
+        console.log("localId" + images.localId);
         wx.previewImage({
-            current: images.localId,
+            current: images.serverId,
             urls: images.serverId
         });
     };
@@ -54,13 +55,14 @@ wx.ready(function () {
                 success: function (res) {
                     i++;
                     //alert('已上传：' + i + '/' + length);
+                    console.log("serverId" + images.serverId);
                     images.serverId.push(res.serverId);
                     if (i < length) {
                         upload();
                     }
                 },
                 fail: function (res) {
-                    alert(JSON.stringify(res));
+                    alert("上传图片失败" + JSON.stringify(res));
                 }
             });
         }
