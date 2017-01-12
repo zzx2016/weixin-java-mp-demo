@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- only scan the Controller class for web context -->
-    <context:component-scan base-package="com.dreamer.invite.controller"/>
+    <context:component-scan base-package="com.dreamer.invite.**"/>
 
     <mvc:annotation-driven>
         <mvc:message-converters>
@@ -29,9 +29,17 @@
         </property>
     </bean>
 
+    <!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/view/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
     <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes" value="application/json"/>
     </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 </beans>

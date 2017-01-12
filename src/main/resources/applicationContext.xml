@@ -10,4 +10,6 @@
 
     <util:properties id="wxProperties" location="classpath:/wx.properties"/>
 
+    <util:properties id="qiniuProperties" location="classpath:/qiniu.properties" />
+
 </beans>
