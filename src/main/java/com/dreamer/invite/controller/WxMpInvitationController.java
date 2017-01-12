@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/invite")
-public class InvitationController {
+public class WxMpInvitationController {
 
 
     /**
