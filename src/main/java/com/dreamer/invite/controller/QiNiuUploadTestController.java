@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dreamer.invite.qiniu.QiNiuImageHelper;
 
+/**
+ * Created by sima on 2017/1/12.
+ */
 @RestController
 @RequestMapping("/qiniu")
 public class QiNiuUploadTestController {
@@ -15,12 +18,12 @@ public class QiNiuUploadTestController {
 
     @RequestMapping("/upload")
     public String uploadImage() {
-        return qiniuHelper.Upload("E:/c1000/c1000_bottom_qq.png", "qq.jpg");
+        return qiniuHelper.upload("E:/c1000/c1000_bottom_qq.png", "qq.jpg");
     }
 
     @RequestMapping("/overlay")
     public String overlayUpload() {
-        return qiniuHelper.OverlayUpload("E:/c1000/c1000_row1_laba.png", "qq.jpg");
+        return qiniuHelper.overlayUpload("E:/c1000/c1000_top_logo.png", "qq.jpg");
     }
 
     @RequestMapping("/download")

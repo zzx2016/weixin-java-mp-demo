@@ -10,10 +10,9 @@ import com.dreamer.invite.config.QiNiuConfig;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 
+
 /**
- * 
- * @author sima
- *
+ * Created by sima on 2017/1/12.
  */
 @Component
 public class QiNiuImageHelper {
@@ -32,7 +31,7 @@ public class QiNiuImageHelper {
 	 * @param name 保存到服务器上的文件名称
 	 * @return 上传成功返回文件路径，失败返回空字符串
 	 */
-	public String Upload(String localPath, String name) {
+	public String upload(String localPath, String name) {
 		try {
 			logger.debug("普通上传，本地路径为：" + toString() + "\t上传到服务器上文件名:" + name);
 			Response res = singleton.getUploadManager().put(localPath, name, singleton.getUpToken());
@@ -51,13 +50,13 @@ public class QiNiuImageHelper {
 
 	/**
 	 * 覆盖上传，同名文件会覆盖掉之前的文件
-	 * @param localPath 本地文件的路径你个
+	 * @param localPath 本地文件的路径名称
 	 * @param name  服务器上文件名称
 	 * @return  上傳圖片的路徑
 	 */
-	public String OverlayUpload(String localPath, String name) {
+	public String overlayUpload(String localPath, String name) {
 		try {
-			logger.debug("覆盖上传，本地路径为：" + toString() + "\t上传到服务器上文件名:" + name);
+			logger.debug("覆盖上传，本地路径为：" + localPath + "\t上传到服务器上文件名:" + name);
 			Response res = singleton.getUploadManager().put(localPath, name, singleton.getOverlayUploadToken(name));
 			if(res.isOK()){
 				return res.bodyString();
