@@ -54,7 +54,7 @@ public class UploadHandler {
                 try {
                     File tempFile = File.createTempFile(String.valueOf(new Date().getTime()),upload.getOriginalFilename());
                     upload.transferTo(tempFile);
-                    JSONObject obj = JSONObject.parseObject(qiniuHelper.Upload(tempFile.getAbsolutePath(),upload.getOriginalFilename()));
+                    JSONObject obj = JSONObject.parseObject(qiniuHelper.upload(tempFile.getAbsolutePath(),upload.getOriginalFilename()));
                     return obj.getString("url");
                 } catch (Exception e) {
                     logger.error("文件"+upload.getOriginalFilename()+"上传出错",e);
@@ -81,7 +81,7 @@ public class UploadHandler {
                 try {
                     File tempFile = File.createTempFile(String.valueOf(new Date().getTime()),upload[i].getOriginalFilename());
                     upload[i].transferTo(tempFile);
-                    JSONObject obj = JSONObject.parseObject(qiniuHelper.Upload(tempFile.getAbsolutePath(),upload[i].getOriginalFilename()));
+                    JSONObject obj = JSONObject.parseObject(qiniuHelper.upload(tempFile.getAbsolutePath(),upload[i].getOriginalFilename()));
                     map.put(obj.getString("key"),obj.getString("url"));
                 } catch (Exception e) {
                     logger.error("文件"+upload[i].getOriginalFilename()+"上传出错",e);

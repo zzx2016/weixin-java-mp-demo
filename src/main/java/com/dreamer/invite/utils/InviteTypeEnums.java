@@ -9,12 +9,12 @@ public enum InviteTypeEnums {
     CONFERENCE(2,"会议"),
     ACTIVITY(3,"活动");
 
-    private int id;
+    private Integer id;
     private String name;
 
-    InviteTypeEnums(String name, int id) {
-        this.name = name;
+    InviteTypeEnums(Integer id, String name) {
         this.id = id;
+        this.name = name;
     }
 
     InviteTypeEnums[] getAllEnums(){
